@@ -1,0 +1,10 @@
+
+\.vs/
+
+\.vscode/
+
+obj/
+
+jenkin_test/bin/
+
+integration_test/bin/

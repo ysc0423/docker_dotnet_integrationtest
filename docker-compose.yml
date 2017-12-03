@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  integration_test:
+    image: integration_test
+    build:
+      context: .
+      dockerfile: integration.Dockerfile
+    depends_on:
+      - jenkin_test
+      - postgres
+
+  jenkin_test:
+    image: jenkin_test
+    build:
+      context: ./jenkin_test
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    volumes:
+      - ./jenkin_test/SQL/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
